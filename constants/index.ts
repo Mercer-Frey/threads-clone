@@ -1,4 +1,4 @@
-export const SIDEBAR_LINKS = [
+export const SIDEBAR_LINKS: ISidebarLinkConst[] = [
     {
         imgURL: "/assets/home.svg",
         route: "/",
@@ -31,13 +31,13 @@ export const SIDEBAR_LINKS = [
     },
 ];
 
-export const PROFILE_TABS = [
+export const PROFILE_TABS: ITabConst[] = [
     {value: "threads", label: "Threads", icon: "/assets/reply.svg"},
     {value: "replies", label: "Replies", icon: "/assets/members.svg"},
     {value: "tagged", label: "Tagged", icon: "/assets/tag.svg"},
 ];
 
-export const COMMUNITY_TABS = [
+export const COMMUNITY_TABS: ITabConst[] = [
     {value: "threads", label: "Threads", icon: "/assets/reply.svg"},
     {value: "members", label: "Members", icon: "/assets/members.svg"},
     {value: "requests", label: "Requests", icon: "/assets/request.svg"},
