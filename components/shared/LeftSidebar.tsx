@@ -7,7 +7,7 @@ import {SignedIn, SignOutButton, useAuth} from "@clerk/nextjs";
 
 import {SIDEBAR_LINKS} from "@/constants";
 
-const LeftSidebar = () => {
+const Page = () => {
 	const router = useRouter();
 	const pathname = usePathname();
 	
@@ -62,4 +62,4 @@ const LeftSidebar = () => {
 	);
 };
 
-export default LeftSidebar;
+export default Page;
