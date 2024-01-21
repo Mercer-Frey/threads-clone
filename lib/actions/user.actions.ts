@@ -2,9 +2,8 @@
 
 import {revalidatePath} from "next/cache";
 
-import User from "../models/user.model";
-
-import {connectToDB} from "../mongoose";
+import User from "@/lib/models/user.model";
+import {connectToDB} from "@/lib/mongoose";
 
 interface Params {
 	userId: string;
@@ -17,7 +16,7 @@ interface Params {
 
 export async function updateUser({userId, bio, name, path, username, image}: Params): Promise<void> {
 	try {
-		connectToDB();
+		await connectToDB();
 		
 		await User.findOneAndUpdate(
 			{id: userId},
@@ -36,5 +35,20 @@ export async function updateUser({userId, bio, name, path, username, image}: Par
 		}
 	} catch (error: any) {
 		throw new Error(`Failed to create/update user: ${error.message}`);
+	}
+}
+
+export async function fetchUser(userId: string) {
+	try {
+		await connectToDB();
+		
+		return await User
+			.findOne({id: userId})
+		// .populate({
+		// 	path: "communities",
+		// 	model: Community,
+		// });
+	} catch (error: any) {
+		throw new Error(`Failed to fetch user: ${error.message}`);
 	}
 }
