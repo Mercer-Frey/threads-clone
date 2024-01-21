@@ -1,7 +1,6 @@
 /** @type {{eslint: {ignoreDuringBuilds: boolean}, images: {remotePatterns: [{protocol: string, hostname: string},{protocol: string, hostname: string},{protocol: string, hostname: string},{protocol: string, hostname: string}]}, experimental: {serverComponentsExternalPackages: string[], serverActions: boolean}}} */
 const nextConfig = {
     experimental: {
-        serverActions: true,
         serverComponentsExternalPackages: ["mongoose"],
     },
     eslint: {
