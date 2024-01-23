@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {formatDateString} from "@/lib/utils";
+import DeleteThread from "@/components/forms/DeleteThread";
 
 interface Props {
 	id: string;
@@ -26,17 +27,8 @@ interface Props {
 	isComment?: boolean;
 }
 
-function ThreadCard({
-	                    id,
-	                    currentUserId,
-	                    parentId,
-	                    content,
-	                    author,
-	                    community,
-	                    createdAt,
-	                    comments,
-	                    isComment,
-                    }: Props) {
+function ThreadCard({id, currentUserId, parentId, content, author, community, createdAt, comments, isComment}: Props) {
+	
 	return (
 		<article
 			className={`flex w-full flex-col rounded-xl
@@ -112,13 +104,13 @@ function ThreadCard({
 					</div>
 				</div>
 				
-				{/*<DeleteThread*/}
-				{/*	threadId={JSON.stringify(id)}*/}
-				{/*	currentUserId={currentUserId}*/}
-				{/*	authorId={author.id}*/}
-				{/*	parentId={parentId}*/}
-				{/*	isComment={isComment}*/}
-				{/*/>*/}
+				<DeleteThread
+					threadId={JSON.stringify(id)}
+					currentUserId={currentUserId}
+					authorId={author.id}
+					parentId={parentId}
+					isComment={isComment}
+				/>
 			</div>
 			
 			{!isComment && comments.length > 0 && (
