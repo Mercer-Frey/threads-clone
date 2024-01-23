@@ -1,4 +1,4 @@
-interface IDTOUpdateUser {
+export interface IDTOUpdateUser {
 	userId: string;
 	username: string;
 	name: string;

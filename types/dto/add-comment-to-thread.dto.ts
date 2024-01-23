@@ -1,6 +1,6 @@
-interface IDTOAddCommentToThread {
-	threadId: string,
-	commentText: string,
-	userId: string,
-	path: string
+export interface IDTOAddCommentToThread {
+	threadId: string;
+	commentText: string;
+	userId: string;
+	path: string;
 }

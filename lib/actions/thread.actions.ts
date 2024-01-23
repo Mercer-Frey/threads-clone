@@ -5,6 +5,8 @@ import {connectToDB} from "@/lib/mongoose";
 import User from "@/lib/models/user.model";
 import Thread from "@/lib/models/thread.model";
 import {revalidatePath} from "next/cache";
+import {IDTOCreateThread} from "@/types/dto/create-thread.dto";
+import {IDTOAddCommentToThread} from "@/types/dto/add-comment-to-thread.dto";
 
 export async function createThread({text, author, communityId, path}: IDTOCreateThread) {
 	try {
