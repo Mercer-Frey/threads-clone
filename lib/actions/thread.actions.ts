@@ -4,6 +4,8 @@ import {connectToDB} from "@/lib/mongoose";
 
 import User from "@/lib/models/user.model";
 import Thread from "@/lib/models/thread.model";
+import Community from "@/lib/models/community.model";
+
 import {revalidatePath} from "next/cache";
 import {IDTOCreateThread} from "@/types/dto/create-thread.dto";
 import {IDTOAddCommentToThread} from "@/types/dto/add-comment-to-thread.dto";
@@ -79,11 +81,11 @@ export async function fetchThreadById(threadId: string) {
 				model: User,
 				select: "_id id name image",
 			}) // Populate the author field with _id and username
-			// .populate({
-			// 	path: "community",
-			// 	model: Community,
-			// 	select: "_id id name image",
-			// }) // Populate the community field with _id and name
+			.populate({
+				path: "community",
+				model: Community,
+				select: "_id id name image",
+			}) // Populate the community field with _id and name
 			.populate({
 				path: "children", // Populate the children field
 				populate: [
@@ -189,10 +191,10 @@ export async function deleteThread(id: string, path: string): Promise<void> {
 		);
 		
 		// Update Community model
-		// await Community.updateMany(
-		// 	{ _id: { $in: Array.from(uniqueCommunityIds) } },
-		// 	{ $pull: { threads: { $in: descendantThreadIds } } }
-		// );
+		await Community.updateMany(
+			{_id: {$in: Array.from(uniqueCommunityIds)}},
+			{$pull: {threads: {$in: descendantThreadIds}}}
+		);
 		
 		revalidatePath(path);
 	} catch (error: any) {
