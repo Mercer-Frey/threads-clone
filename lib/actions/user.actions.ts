@@ -5,16 +5,7 @@ import {revalidatePath} from "next/cache";
 import User from "@/lib/models/user.model";
 import {connectToDB} from "@/lib/mongoose";
 
-interface Params {
-	userId: string;
-	username: string;
-	name: string;
-	bio: string;
-	image: string;
-	path: string;
-}
-
-export async function updateUser({userId, bio, name, path, username, image}: Params): Promise<void> {
+export async function updateUser({userId, bio, name, path, username, image}: IDTOUpdateUser): Promise<void> {
 	try {
 		await connectToDB();
 		
