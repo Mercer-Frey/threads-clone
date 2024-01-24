@@ -30,14 +30,12 @@ interface Props {
 	btnTitle: string;
 }
 
-type HandleImageEvent = (e: ChangeEvent<HTMLInputElement>, fieldChange: (value: string) => void) => void
-type SubmitEvent = (values: z.infer<typeof UserValidationSchema>) => void
 const AccountProfile = ({user, btnTitle}: Props) => {
 	const router = useRouter();
 	const pathname = usePathname();
+	const {startUpload} = useUploadThing("media");
 	
 	const [files, setFiles] = useState<File[]>([]);
-	const {startUpload} = useUploadThing("media");
 	
 	const form = useForm<z.infer<typeof UserValidationSchema>>({
 		resolver: zodResolver(UserValidationSchema),
@@ -49,7 +47,7 @@ const AccountProfile = ({user, btnTitle}: Props) => {
 		},
 	});
 	
-	const onSubmit: SubmitEvent = async values => {
+	const onSubmit = async (values: z.infer<typeof UserValidationSchema>) => {
 		const blob = values.profile_photo;
 		
 		const hasImageChanged = isBase64Image(blob);
@@ -77,7 +75,10 @@ const AccountProfile = ({user, btnTitle}: Props) => {
 		}
 	};
 	
-	const handleImage: HandleImageEvent = (e, fieldChange) => {
+	const handleImage = (
+		e: ChangeEvent<HTMLInputElement>,
+		fieldChange: (value: string) => void
+	) => {
 		e.preventDefault();
 		
 		const fileReader = new FileReader();

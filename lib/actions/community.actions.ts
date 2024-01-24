@@ -2,11 +2,11 @@
 
 import {FilterQuery, SortOrder} from "mongoose";
 
-import User from "@/lib/models/user.model";
-import Thread from "@/lib/models/thread.model";
-import Community from "@/lib/models/community.model";
+import Community from "../models/community.model";
+import Thread from "../models/thread.model";
+import User from "../models/user.model";
 
-import {connectToDB} from "@/lib/mongoose";
+import {connectToDB} from "../mongoose";
 
 export async function createCommunity(
 	id: string,
@@ -72,7 +72,7 @@ export async function fetchCommunityDetails(id: string) {
 
 export async function fetchCommunityPosts(id: string) {
 	try {
-		await connectToDB();
+		connectToDB();
 		
 		const communityPosts = await Community.findById(id).populate({
 			path: "threads",

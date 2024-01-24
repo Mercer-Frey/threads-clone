@@ -11,7 +11,7 @@ import {Button} from "@/components/ui/button";
 import {Textarea} from "@/components/ui/textarea";
 
 import {ThreadValidationSchema} from "@/lib/validations/thread-schema";
-import { createThread } from "@/lib/actions/thread.actions";
+import {createThread} from "@/lib/actions/thread.actions";
 
 interface Props {
 	userId: string;
@@ -35,10 +35,10 @@ function PostThread({userId}: Props) {
 		await createThread({
 			text: values.thread,
 			author: userId,
-			communityId: null,
+			communityId: organization ? organization.id : null,
 			path: pathname,
 		});
-
+		
 		router.push("/");
 	};
 	
