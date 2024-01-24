@@ -1,10 +1,9 @@
 import {redirect} from "next/navigation";
 
-// import {fetchCommunityPosts} from "@/lib/actions/community.actions";
+import {fetchCommunityPosts} from "@/lib/actions/community.actions";
 import {fetchUserPosts} from "@/lib/actions/user.actions";
 
-import ThreadCard from "../cards/ThreadCard";
-import {InferSchemaThread} from "@/lib/models/thread.model";
+import ThreadCard from "@/components/cards/ThreadCard";
 
 interface Result {
 	name: string;
@@ -40,14 +39,14 @@ interface Props {
 }
 
 async function ThreadsTab({currentUserId, accountId, accountType}: Props) {
-	let result: InferSchemaThread[];
-	//
-	// if (accountType === "Community") {
-	// 	result = await fetchCommunityPosts(accountId);
-	// } else {
-	result = await fetchUserPosts(accountId);
-	// }
-	//
+	let result: Result;
+	
+	if (accountType === "Community") {
+		result = await fetchCommunityPosts(accountId);
+	} else {
+		result = await fetchUserPosts(accountId);
+	}
+	
 	if (!result) {
 		redirect("/");
 	}
